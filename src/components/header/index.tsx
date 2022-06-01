@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import classes from './header.module.scss';
 
-const navUrls = [
+const navUrls: Array<{ text: string; url: `/${string}` }> = [
   { text: 'Settings', url: '/' },
   { text: 'Wallet', url: '/wallet' },
   { text: 'Contract', url: '/contract' },
