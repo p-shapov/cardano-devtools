@@ -1,8 +1,8 @@
 {
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:prettier/recommended",
     "prettier"
@@ -43,9 +43,6 @@
     "no-empty": "error",
     "no-shadow": ["off", {
       "hoist": "all"
-    }],
-    "prettier/prettier": ["error", {
-      "endOfLine": "auto"
     }]
   }
 }
