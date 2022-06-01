@@ -12,7 +12,6 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
-    "@types/styled-components": "^5.1.24",
     "ethers": "^5.6.2",
     "mobx": "^6.5.0",
     "mobx-react-lite": "^3.3.0",
@@ -25,7 +24,6 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "rxjs": "^7.5.5",
-    "styled-components": "^5.3.5",
     "typescript": "^4.7.2",
     "web-vitals": "^2.1.0"
   },
