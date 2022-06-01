@@ -1,4 +1,5 @@
 import { iconCardano } from 'assets/icons/cardano';
+import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import classes from './header.module.scss';
@@ -9,7 +10,7 @@ const navUrls: Array<{ text: string; url: `/${string}` }> = [
   { text: 'Contract', url: '/contract' },
 ];
 
-export const Header = () => {
+export const Header: FC = () => {
   const location = useLocation();
 
   return (
