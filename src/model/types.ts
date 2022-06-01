@@ -17,5 +17,5 @@ type DefinitionRecord = {
 
 type DefinitionConstructor = {
   tag: string;
-  contents?: Definition | Definition[];
+  contents?: Definition | Array<Definition>;
 };

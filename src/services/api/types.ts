@@ -1,4 +1,4 @@
-export type GetInstancesResponse = ContractInstance[];
+export type GetInstancesResponse = Array<ContractInstance>;
 
 export type ContractInstance = {
   cicWallet: {
@@ -29,5 +29,5 @@ type DefinitionRecord = {
 
 type DefinitionConstructor = {
   tag: string;
-  contents?: Definition | Definition[];
+  contents?: Definition | Array<Definition>;
 };
