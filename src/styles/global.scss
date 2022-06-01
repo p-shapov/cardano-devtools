@@ -1,0 +1,30 @@
+@import './constants.scss';
+@import './fonts.scss';
+@import './mixins.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  z-index: 0;
+
+  background: $bg-primary;
+  color: $fg-primary;
+
+  text-rendering: optimizeSpeed;
+
+  font-family: $font-primary;
+  font-weight: normal;
+}

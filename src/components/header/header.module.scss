@@ -1,0 +1,49 @@
+@import 'styles/global.scss';
+
+.root {
+  @include container;
+
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  column-gap: 60px;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.logo {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  column-gap: 20px;
+
+  color: $accent;
+
+  text-transform: uppercase;
+
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 120%;
+
+  svg {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  column-gap: 60px;
+}
+
+.item {
+  @include link;
+
+  text-transform: uppercase;
+  
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 120%;
+}
