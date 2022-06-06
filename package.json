@@ -21,10 +21,7 @@
     ]
   },
   "dependencies": {
-    "ethers": "^5.6.2",
-    "mobx": "^6.5.0",
-    "mobx-react-lite": "^3.3.0",
-    "mobx-utils": "^6.0.4",
+    "purescript": "^0.15.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-query": "^3.39.0",
@@ -34,7 +31,6 @@
     "the-new-css-reset": "^1.6.1"
   },
   "devDependencies": {
-    "react-scripts": "^5.0.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
@@ -50,7 +46,9 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "2.6.2",
+    "react-scripts": "^5.0.1",
     "sass": "^1.52.1",
+    "spago": "^0.20.9",
     "typescript": "^4.7.2"
   }
 }
