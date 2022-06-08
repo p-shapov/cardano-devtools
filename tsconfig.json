@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "./src"
   },
-  "include": ["src"],
-  "exclude": ["src/_outdated"]
+  "include": ["src", "public"],
+  "exclude": ["_outdated"]
 }
