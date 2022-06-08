@@ -28,7 +28,7 @@ module.exports = {
       },
     },
   },
-  entry: './src/entry.js',
+  entry: './public/index.js',
   output: {
     filename: '[name].[contenthash].js',
     path: path.join(__dirname, 'dist'),
@@ -75,7 +75,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: `public/index.html`,
+      template: 'public/index.html',
       title: 'Cardano Devtools',
     }),
     new MiniCssExtractPlugin({
