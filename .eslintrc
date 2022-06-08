@@ -47,5 +47,6 @@
         "@typescript-eslint/no-var-requires": "off"
       }
     }
-  ]
+  ],
+  "eslintIgnore": ["./src/_outdated/**/*"]
 }
