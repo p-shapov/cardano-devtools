@@ -1,8 +1,6 @@
 {
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:prettier/recommended",
     "prettier"
@@ -22,9 +20,6 @@
       "ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
       "ignoreUrls": true
     }],
-    "react/react-in-jsx-scope": "off",
-    "react/display-name": "off",
-    "react/no-children-prop": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -39,10 +34,18 @@
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-unused-vars": "error",
-    "no-console": "warn",
+    "no-shadow": ["off", { 
+      "hoist": "all" 
+    }],
     "no-empty": "error",
-    "no-shadow": ["off", {
-      "hoist": "all"
-    }]
-  }
+    "no-console": "off"
+  },
+  "overrides": [
+    {
+      "files": ["./*.config.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
 }
