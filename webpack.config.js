@@ -28,7 +28,7 @@ module.exports = {
       },
     },
   },
-  entry: './entry.js',
+  entry: './src/entry.js',
   output: {
     filename: '[name].[contenthash].js',
     path: path.join(__dirname, 'dist'),
