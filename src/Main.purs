@@ -3,8 +3,6 @@ module Main where
 import Prelude
 
 import AppM (runAppM)
-import CSS (block, color, display)
-import CSS.Color (red)
 import Effect (Effect)
 import Halogen as H
 import Halogen.Aff as HA
@@ -22,7 +20,7 @@ main = HA.runHalogenAff do
 
 data Action = Increment | Decrement
 
-mainComponent :: forall a b c d. H.Component HH.HTML a b c d
+mainComponent :: forall a b c d. H.Component (HH.HTML a) b c d
 mainComponent =
   H.mkComponent
     { initialState
