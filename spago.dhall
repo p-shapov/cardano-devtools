@@ -4,6 +4,7 @@
     , "css"
     , "effect"
     , "halogen"
+    , "halogen-css"
     , "prelude"
     ]
 , packages = ./packages.dhall
