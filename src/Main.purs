@@ -1,17 +1,18 @@
 module Main where
 
-import Data.Maybe (Maybe(..))
-
 import Prelude
 
+import AppM (runAppM)
+import CSS (block, color, display)
+import CSS.Color (red)
 import Effect (Effect)
 import Halogen as H
 import Halogen.Aff as HA
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
+import Halogen.HTML.CSS as HCSS
+import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
-
-import AppM
+import Main.CSS as Styles
 
 main :: Effect Unit
 main = HA.runHalogenAff do
@@ -32,4 +33,10 @@ mainComponent =
   initialState _ = 0
 
   render _ =
-    HH.div_ []
+    HH.div
+      [ HP.classes [ HH.ClassName "main" ]
+      ]
+
+      [ HCSS.stylesheet Styles.main
+      , HH.span_ [ HH.text "asd" ]
+      ]
