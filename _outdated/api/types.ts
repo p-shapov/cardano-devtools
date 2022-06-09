@@ -5,6 +5,7 @@ export type ContractInstance = {
     prettyWalletName: string | null;
     getWalletId: string;
   };
+  // eslint-disable-next-line @typescript-eslint/ban-types
   cicCurrentState: {};
   cicContract: {
     unContractInstanceId: string;
