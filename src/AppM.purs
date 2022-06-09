@@ -2,7 +2,7 @@ module AppM where
 
 import Prelude
 import Control.Monad.Error.Class (class MonadError, class MonadThrow)
-import Control.Monad.Reader (class MonadAsk, ReaderT, runReaderT)
+import Control.Monad.Reader (ReaderT, runReaderT)
 import Data.Newtype (class Newtype, unwrap)
 import Effect.Aff (Aff, Error)
 import Effect.Aff.Class (class MonadAff)
