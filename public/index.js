@@ -1,7 +1,7 @@
 import "the-new-css-reset";
 
-import "./assets/styles/fonts.css";
-import "./assets/styles/global.css";
+import "./assets/styles/fonts.scss";
+import "./assets/styles/global.scss";
 
 import('../output/Main')
   .then((m) => m.main())
