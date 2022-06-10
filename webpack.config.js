@@ -55,11 +55,28 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader, 
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            }
+          }, 
+          'sass-loader'
+        ],
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/images/[name][ext]'
         }
+      },
+      {
+        test: /\.svg/i,
+        type: 'asset/inline',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -70,6 +87,10 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js'],
+    alias: {
+      'assets': path.resolve(__dirname, './public/assets/'),
+      'Component': path.resolve(__dirname, './src/Component/')
+    },
     fallback: {
       fs: false,
     },

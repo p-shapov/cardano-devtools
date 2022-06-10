@@ -1,10 +1,8 @@
 { name = "my-project"
 , dependencies = 
     [ "console"
-    , "css"
     , "effect"
     , "halogen"
-    , "halogen-css"
     , "prelude"
     , "aff"
     , "newtype"
