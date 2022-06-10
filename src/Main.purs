@@ -3,14 +3,14 @@ module Main where
 import Prelude
 
 import AppM (runAppM)
+import Assets.Images (logo)
+import Component.Header.HTML (header)
 import Effect (Effect)
 import Halogen as H
 import Halogen.Aff as HA
 import Halogen.HTML as HH
-import Halogen.HTML.CSS as HCSS
 import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
-import Main.CSS as Styles
 
 main :: Effect Unit
 main = HA.runHalogenAff do
@@ -35,6 +35,6 @@ mainComponent =
       [ HP.classes [ HH.ClassName "main" ]
       ]
 
-      [ HCSS.stylesheet Styles.main
-      , HH.span_ [ HH.text "asd" ]
+      [ header
+      , HH.img [ HP.src logo ]
       ]
