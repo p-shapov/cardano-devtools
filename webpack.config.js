@@ -31,6 +31,7 @@ module.exports = {
   entry: './public/index.js',
   output: {
     filename: '[name].[contenthash].js',
+    publicPath: '',
     path: path.join(__dirname, 'dist'),
     pathinfo: true,
     clean: true,
@@ -56,6 +57,9 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]'
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
