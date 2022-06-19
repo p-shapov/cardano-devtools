@@ -3,8 +3,7 @@ module Main where
 import Prelude
 
 import AppM (runAppM)
-import Assets.Images (logo)
-import Component.Header.HTML (header)
+import Component.Header (header)
 import Effect (Effect)
 import Halogen as H
 import Halogen.Aff as HA
@@ -20,7 +19,7 @@ main = HA.runHalogenAff do
 
 data Action = Increment | Decrement
 
-mainComponent :: forall a b c d. H.Component (HH.HTML a) b c d
+mainComponent :: ∀ query input output m. H.Component (HH.HTML query) input output m
 mainComponent =
   H.mkComponent
     { initialState
@@ -36,5 +35,4 @@ mainComponent =
       ]
 
       [ header
-      , HH.img [ HP.src logo ]
       ]
