@@ -2,7 +2,7 @@ module Service.Route where
 
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
-import Prelude (class Eq, class Ord, ($), (==))
+import Prelude (class Eq, class Ord, class Show, ($), (==))
 import Routing.Duplex as RD
 import Routing.Duplex.Generic as RG
 import Routing.Duplex.Generic.Syntax ((/))
@@ -22,6 +22,11 @@ instance eqRoute :: Eq Route where
 
 derive instance ordRoute :: Ord Route
 derive instance genericRoute :: Generic Route _
+instance showRoute :: Show Route where
+  show Home = "Home"
+  show Wallet = "Wallet"
+  show (Contract Nothing) = "Contract"
+  show (Contract (Just instanceId)) = instanceId
 
 routeCodec :: RD.RouteDuplex' Route
 routeCodec = RD.root $ RG.sum
