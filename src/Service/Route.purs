@@ -1,6 +1,6 @@
 module Service.Route where
 
-import Service.NonStrictEq (class NonStrictEq)
+import Data.NonStrictEq (class NonStrictEq)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Prelude (class Eq, class Ord, class Show, ($))

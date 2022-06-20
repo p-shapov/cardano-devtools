@@ -1,4 +1,4 @@
-module Service.NonStrictEq where
+module Data.NonStrictEq where
 
 import Prelude
 
