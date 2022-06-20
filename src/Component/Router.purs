@@ -35,7 +35,6 @@ headerNav =
   [ Home
   , Wallet
   , Contract Nothing
-  , Contract $ Just "123"
   ]
 
 component :: ∀ i o m. MonadEffect m => Navigate m => H.Component Query i o m
