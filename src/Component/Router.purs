@@ -30,11 +30,11 @@ type ChildSlots =
   , contract :: Contract.Slot Unit
   )
 
-headerLinks :: Array Header.Link
-headerLinks =
-  [ { label: "Home", route: Home }
-  , { label: "Wallet", route: Wallet }
-  , { label: "Contract", route: Contract Nothing }
+headerNav :: Array Route
+headerNav =
+  [ Home
+  , Wallet
+  , Contract Nothing
   ]
 
 component :: ∀ i o m. MonadEffect m => Navigate m => H.Component Query i o m
@@ -51,7 +51,7 @@ component = H.mkComponent
 
   render :: State -> H.ComponentHTML Action ChildSlots m
   render st = HH.div_
-    [ Header.render { active: st.route, links: headerLinks }
+    [ Header.render { active: st.route, nav: headerNav }
     , case st.route of
         Nothing -> HH.h1_ [ HH.text "404" ]
         Just route -> case route of
