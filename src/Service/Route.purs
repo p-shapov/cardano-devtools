@@ -1,8 +1,8 @@
 module Service.Route where
 
 import Data.Generic.Rep (class Generic)
-import Data.Maybe (Maybe)
-import Prelude (class Eq, class Ord, ($))
+import Data.Maybe (Maybe(..))
+import Prelude (class Eq, class Ord, ($), (==))
 import Routing.Duplex as RD
 import Routing.Duplex.Generic as RG
 import Routing.Duplex.Generic.Syntax ((/))
@@ -12,9 +12,16 @@ data Route
   | Wallet
   | Contract (Maybe String)
 
-derive instance genericRoute :: Generic Route _
-derive instance eqRoute :: Eq Route
+instance eqRoute :: Eq Route where
+  eq Home Home = true
+  eq Wallet Wallet = true
+  eq (Contract Nothing) (Contract _) = true
+  eq (Contract _) (Contract Nothing) = true
+  eq (Contract (Just x)) (Contract (Just y)) = x == y
+  eq _ _ = false
+
 derive instance ordRoute :: Ord Route
+derive instance genericRoute :: Generic Route _
 
 routeCodec :: RD.RouteDuplex' Route
 routeCodec = RD.root $ RG.sum
