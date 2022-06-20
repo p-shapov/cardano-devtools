@@ -16,7 +16,6 @@ instance eqRoute :: Eq Route where
   eq Home Home = true
   eq Wallet Wallet = true
   eq (Contract Nothing) (Contract _) = true
-  eq (Contract _) (Contract Nothing) = true
   eq (Contract (Just x)) (Contract (Just y)) = x == y
   eq _ _ = false
 
