@@ -6,7 +6,7 @@ import AppM (runAppM)
 import Component.Router as Router
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import Effect.Aff (Aff, launchAff_)
+import Effect.Aff (launchAff_)
 import Halogen (liftEffect)
 import Halogen as H
 import Halogen.Aff as HA
@@ -17,12 +17,10 @@ import Service.Route (routeCodec)
 
 main :: Effect Unit
 main = HA.runHalogenAff do
-  body <- HA.awaitBody
   let env = { someEnvProp: "Some env" }
-  let
-    rootComponent :: ∀ i. H.Component Router.Query i Void Aff
-    rootComponent = H.hoist (runAppM env) Router.component
+  let rootComponent = H.hoist (runAppM env) Router.component
 
+  body <- HA.awaitBody
   halogenIO <- runUI rootComponent unit body
 
   void $ liftEffect $ matchesWith (parse routeCodec) \old new ->

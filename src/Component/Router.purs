@@ -4,8 +4,8 @@ import Prelude
 
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Effect.Class (class MonadEffect, liftEffect)
-import Element.Header as Header
+import Effect.Class (class MonadEffect)
+import Component.HTML.Header as Header
 import Halogen as H
 import Halogen.HTML as HH
 import Page.Contract as Contract
@@ -15,8 +15,6 @@ import Routing.Duplex as RD
 import Routing.Hash as RH
 import Service.Navigate (class Navigate, navigate)
 import Service.Route (Route(..), routeCodec)
-import Web.Event.Event (preventDefault)
-import Web.UIEvent.MouseEvent (MouseEvent, toEvent)
 
 type State =
   { route :: Maybe Route
@@ -24,7 +22,7 @@ type State =
 
 data Query a = Navigate Route a
 
-data Action = Initialize | GoTo Route MouseEvent
+data Action = Initialize
 
 type ChildSlots =
   ( home :: Home.Slot Unit
@@ -32,11 +30,11 @@ type ChildSlots =
   , contract :: Contract.Slot Unit
   )
 
-headerLinks :: Array (Header.Link Route)
-headerLinks =
-  [ { label: "Home", route: Home }
-  , { label: "Wallet", route: Wallet }
-  , { label: "Contract", route: Contract Nothing }
+headerNav :: Array Route
+headerNav =
+  [ Home
+  , Wallet
+  , Contract Nothing
   ]
 
 component :: ∀ i o m. MonadEffect m => Navigate m => H.Component Query i o m
@@ -53,7 +51,7 @@ component = H.mkComponent
 
   render :: State -> H.ComponentHTML Action ChildSlots m
   render st = HH.div_
-    [ Header.render { active: st.route, links: headerLinks, goto: \route -> GoTo route }
+    [ Header.render { active: st.route, nav: headerNav }
     , case st.route of
         Nothing -> HH.h1_ [ HH.text "404" ]
         Just route -> case route of
@@ -70,11 +68,6 @@ component = H.mkComponent
     Initialize -> do
       initialRoute <- hush <<< (RD.parse routeCodec) <$> H.liftEffect RH.getHash
       navigate $ fromMaybe Home initialRoute
-    --  Handles the consecutive route changes.
-    GoTo route e -> do
-      liftEffect $ preventDefault (toEvent e)
-      mRoute <- H.gets _.route
-      when (mRoute /= Just route) $ navigate route
 
   handleQuery :: ∀ a. Query a -> H.HalogenM State Action ChildSlots o m (Maybe a)
   handleQuery = case _ of

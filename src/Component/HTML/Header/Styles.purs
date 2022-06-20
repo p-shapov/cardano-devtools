@@ -1,4 +1,4 @@
-module Element.Header.Styles
+module Component.HTML.Header.Styles
   ( styles
   ) where
 
