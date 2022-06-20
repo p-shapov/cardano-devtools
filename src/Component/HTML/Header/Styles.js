@@ -1,3 +1,3 @@
-import styles from 'Element/Header/Styles.scss';
+import styles from 'Component/HTML/Header/Styles.scss';
 
 export { styles }

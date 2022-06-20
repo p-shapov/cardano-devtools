@@ -4,7 +4,7 @@ import Prelude
 
 import Assets.Icons (iconCardano)
 import Data.Maybe (Maybe(..))
-import Element.Header.Styles (styles)
+import Component.HTML.Header.Styles (styles)
 import Component.Utils as U
 import Halogen.HTML as HH
 import Service.Route (Route)
