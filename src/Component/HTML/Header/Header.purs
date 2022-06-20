@@ -8,6 +8,7 @@ import Component.HTML.Header.Styles (styles)
 import Component.Utils as U
 import Halogen.HTML as HH
 import Service.Route (Route)
+import Service.NonStrictEq ((~=))
 
 type Input =
   { active :: Maybe Route
@@ -39,4 +40,4 @@ render { active, nav } = HH.header
     ]
     [ HH.text $ show route ]
     where
-    isActive = Just route == active
+    isActive = Just route ~= active

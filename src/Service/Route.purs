@@ -1,8 +1,9 @@
 module Service.Route where
 
+import Service.NonStrictEq (class NonStrictEq)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
-import Prelude (class Eq, class Ord, class Show, ($), (==))
+import Prelude (class Eq, class Ord, class Show, ($))
 import Routing.Duplex as RD
 import Routing.Duplex.Generic as RG
 import Routing.Duplex.Generic.Syntax ((/))
@@ -12,15 +13,16 @@ data Route
   | Wallet
   | Contract (Maybe String)
 
-instance eqRoute :: Eq Route where
-  eq Home Home = true
-  eq Wallet Wallet = true
-  eq (Contract Nothing) (Contract _) = true
-  eq (Contract (Just x)) (Contract (Just y)) = x == y
-  eq _ _ = false
-
+derive instance eqRoute :: Eq Route
 derive instance ordRoute :: Ord Route
 derive instance genericRoute :: Generic Route _
+
+instance nonStrictEqRoute :: NonStrictEq Route where
+  nonStrictEq Home Home = true
+  nonStrictEq Wallet Wallet = true
+  nonStrictEq (Contract _) (Contract _) = true
+  nonStrictEq _ _ = false
+
 instance showRoute :: Show Route where
   show Home = "Home"
   show Wallet = "Wallet"
