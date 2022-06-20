@@ -31,5 +31,5 @@ instance navigateAppM :: Navigate AppM where
 
 type Env = { someEnvProp :: String }
 
-runAppM :: forall a. Env -> AppM a -> Aff a
+runAppM :: ∀ a. Env -> AppM a -> Aff a
 runAppM env = flip runReaderT env <<< unwrap

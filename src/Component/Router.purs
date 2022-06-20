@@ -3,9 +3,7 @@ module Component.Router where
 import Prelude
 
 import Data.Either (hush)
-import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Show.Generic (genericShow)
 import Effect.Class (class MonadEffect, liftEffect)
 import Element.Header as Header
 import Halogen as H
@@ -26,10 +24,6 @@ type State =
 
 data Query a = Navigate Route a
 
-derive instance genericQuery :: Generic (Query a) _
-instance showQuery :: Show a => Show (Query a) where
-  show = genericShow
-
 data Action = Initialize | GoTo Route MouseEvent
 
 type ChildSlots =
@@ -38,8 +32,8 @@ type ChildSlots =
   , contract :: Contract.Slot Unit
   )
 
-pages :: Array (Header.Link Route)
-pages =
+headerLinks :: Array (Header.Link Route)
+headerLinks =
   [ { label: "Home", route: Home }
   , { label: "Wallet", route: Wallet }
   , { label: "Contract", route: Contract Nothing }
@@ -59,9 +53,9 @@ component = H.mkComponent
 
   render :: State -> H.ComponentHTML Action ChildSlots m
   render st = HH.div_
-    [ Header.render { active: st.route, pages } \route -> GoTo route
+    [ Header.render { active: st.route, links: headerLinks, goto: \route -> GoTo route }
     , case st.route of
-        Nothing -> HH.h1_ [ HH.text "That page wasn't found" ]
+        Nothing -> HH.h1_ [ HH.text "404" ]
         Just route -> case route of
           Home -> HH.slot_ Home._home unit Home.component unit
           Wallet -> HH.slot_ Wallet._wallet unit Wallet.component unit

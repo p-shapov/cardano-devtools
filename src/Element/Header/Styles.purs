@@ -2,12 +2,12 @@ module Element.Header.Styles
   ( styles
   ) where
 
-import Halogen.HTML as HH
+import Util as U
 
 foreign import styles
-  :: { header :: HH.ClassName
-     , logo :: HH.ClassName
-     , nav :: HH.ClassName
-     , link :: HH.ClassName
-     , "link--active" :: HH.ClassName
+  :: { header :: String
+     , logo :: String
+     , nav :: String
+     , link :: String
+     , "link--active" :: String
      }
