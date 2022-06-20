@@ -11,8 +11,6 @@
     , "maybe"
     , "routing-duplex"
     , "either"
-    , "web-events"
-    , "web-uievents"
     ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
