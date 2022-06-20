@@ -3,36 +3,30 @@ module Main where
 import Prelude
 
 import AppM (runAppM)
-import Component.Header (header)
+import Component.Router as Router
+import Data.Maybe (Maybe(..))
 import Effect (Effect)
+import Effect.Aff (Aff, apathize, launchAff_)
+import Effect.Console (log)
+import Halogen (liftEffect)
 import Halogen as H
 import Halogen.Aff as HA
-import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
+import Routing.Duplex (parse)
+import Routing.Hash (matchesWith)
+import Service.Route (routeCodec)
 
 main :: Effect Unit
 main = HA.runHalogenAff do
   body <- HA.awaitBody
-  _ <- runUI (H.hoist (runAppM { someEnvProp: "Some env" }) mainComponent) unit body
-  pure unit
+  let env = { someEnvProp: "Some env" }
+  let
+    rootComponent :: ∀ i. H.Component Router.Query i Void Aff
+    rootComponent = H.hoist (runAppM env) Router.component
 
-data Action = Increment | Decrement
+  halogenIO <- runUI rootComponent unit body
 
-mainComponent :: ∀ query input output m. H.Component (HH.HTML query) input output m
-mainComponent =
-  H.mkComponent
-    { initialState
-    , render
-    , eval: H.mkEval $ H.defaultEval
-    }
-  where
-  initialState _ = 0
-
-  render _ =
-    HH.div
-      [ HP.classes [ HH.ClassName "main" ]
-      ]
-
-      [ header
-      ]
+  void $ liftEffect $ matchesWith (parse routeCodec) \old new ->
+    when (old /= Just new) $ launchAff_ do
+      _response <- halogenIO.query $ H.mkTell $ Router.Navigate new
+      pure unit

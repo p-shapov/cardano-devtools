@@ -6,7 +6,7 @@
     "start": "webpack serve --progress --color --hot",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js ",
-    "svgen": "svgen -F ./public/assets/svg -o ./src/assets/Icons.purs"
+    "svgen": "svgen -F ./public/assets/svg -o ./src/Assets/Icons.purs -m Assets.Icons"
   },
   "browserslist": {
     "production": [

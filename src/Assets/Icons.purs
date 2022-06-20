@@ -1,4 +1,4 @@
-module Icons where
+module Assets.Icons where
 
 import Prelude ((<>))
 import Halogen.HTML

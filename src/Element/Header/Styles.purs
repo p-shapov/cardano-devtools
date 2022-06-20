@@ -1,4 +1,4 @@
-module Component.Header.Styles
+module Element.Header.Styles
   ( styles
   ) where
 
@@ -9,4 +9,5 @@ foreign import styles
      , logo :: HH.ClassName
      , nav :: HH.ClassName
      , link :: HH.ClassName
+     , "link--active" :: HH.ClassName
      }

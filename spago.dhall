@@ -10,8 +10,9 @@
     , "routing"
     , "maybe"
     , "routing-duplex"
-    , "arrays"
-    , "tuples"
+    , "either"
+    , "web-events"
+    , "web-uievents"
     ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
