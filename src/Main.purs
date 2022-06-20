@@ -6,8 +6,7 @@ import AppM (runAppM)
 import Component.Router as Router
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import Effect.Aff (Aff, apathize, launchAff_)
-import Effect.Console (log)
+import Effect.Aff (Aff, launchAff_)
 import Halogen (liftEffect)
 import Halogen as H
 import Halogen.Aff as HA

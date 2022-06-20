@@ -1,8 +1,4 @@
-module Component.Router
-  ( Action(..)
-  , Query(..)
-  , component
-  ) where
+module Component.Router where
 
 import Prelude
 
@@ -11,10 +7,10 @@ import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Show.Generic (genericShow)
 import Effect.Class (class MonadEffect, liftEffect)
-import Effect.Console (log)
 import Element.Header as Header
 import Halogen as H
 import Halogen.HTML as HH
+import Page.Contract as Contract
 import Page.Home as Home
 import Page.Wallet as Wallet
 import Routing.Duplex as RD
@@ -39,7 +35,15 @@ data Action = Initialize | GoTo Route MouseEvent
 type ChildSlots =
   ( home :: Home.Slot Unit
   , wallet :: Wallet.Slot Unit
+  , contract :: Contract.Slot Unit
   )
+
+pages :: Array (Header.Link Route)
+pages =
+  [ { label: "Home", route: Home }
+  , { label: "Wallet", route: Wallet }
+  , { label: "Contract", route: Contract Nothing }
+  ]
 
 component :: ∀ i o m. MonadEffect m => Navigate m => H.Component Query i o m
 component = H.mkComponent
@@ -53,25 +57,20 @@ component = H.mkComponent
   }
   where
 
-  render :: ∀ m. State -> H.ComponentHTML Action ChildSlots m
+  render :: State -> H.ComponentHTML Action ChildSlots m
   render st = HH.div_
-    [ Header.render
-        { active: st.route
-        , pages:
-            [ { label: "Home", route: Home }
-            , { label: "Wallet", route: Wallet }
-            ]
-        }
-        \route -> GoTo route
+    [ Header.render { active: st.route, pages } \route -> GoTo route
     , case st.route of
         Nothing -> HH.h1_ [ HH.text "That page wasn't found" ]
         Just route -> case route of
           Home -> HH.slot_ Home._home unit Home.component unit
           Wallet -> HH.slot_ Wallet._wallet unit Wallet.component unit
-          Contract a -> HH.h1_ [ HH.text $ show a ]
+          Contract msid -> case msid of
+            Nothing -> HH.slot_ Contract._contract unit Contract.component unit
+            Just sid -> HH.h1_ [ HH.text sid ]
     ]
 
-  handleAction :: ∀ o m. MonadEffect m => Navigate m => Action -> H.HalogenM State Action ChildSlots o m Unit
+  handleAction :: Action -> H.HalogenM State Action ChildSlots o m Unit
   handleAction = case _ of
     -- Handles initialization of the route
     Initialize -> do
@@ -83,7 +82,7 @@ component = H.mkComponent
       mRoute <- H.gets _.route
       when (mRoute /= Just route) $ navigate route
 
-  handleQuery :: ∀ a o m. Query a -> H.HalogenM State Action ChildSlots o m (Maybe a)
+  handleQuery :: ∀ a. Query a -> H.HalogenM State Action ChildSlots o m (Maybe a)
   handleQuery = case _ of
     -- This is the case that runs every time the brower's hash route changes.
     Navigate route a -> do

@@ -1,9 +1,9 @@
 module Service.Route where
 
-import Prelude
-
 import Data.Generic.Rep (class Generic)
+import Data.Maybe (Maybe)
 import Data.Show.Generic (genericShow)
+import Prelude (class Eq, class Ord, class Show, ($))
 import Routing.Duplex as RD
 import Routing.Duplex.Generic (noArgs, sum)
 import Routing.Duplex.Generic.Syntax ((/))
@@ -11,7 +11,7 @@ import Routing.Duplex.Generic.Syntax ((/))
 data Route
   = Home
   | Wallet
-  | Contract String
+  | Contract (Maybe String)
 
 derive instance genericRoute :: Generic Route _
 derive instance eqRoute :: Eq Route
@@ -24,5 +24,5 @@ routeCodec :: RD.RouteDuplex' Route
 routeCodec = RD.root $ sum
   { "Home": noArgs
   , "Wallet": "wallet" / noArgs
-  , "Contract": "contract" / RD.string RD.segment
+  , "Contract": "contract" / RD.optional RD.segment
   }
