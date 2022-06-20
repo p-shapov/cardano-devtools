@@ -27,7 +27,7 @@ instance showRoute :: Show Route where
   show Home = "Home"
   show Wallet = "Wallet"
   show (Contract Nothing) = "Contract"
-  show (Contract (Just instanceId)) = instanceId
+  show (Contract (Just sid)) = sid
 
 routeCodec :: RD.RouteDuplex' Route
 routeCodec = RD.root $ RG.sum
