@@ -2,6 +2,7 @@ module Component.Utils where
 
 import Prelude
 
+import Data.Maybe (Maybe(..))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Routing.Duplex as RD
@@ -19,3 +20,10 @@ composeCn = HP.classes <<< map
       CondElseCN cond x y -> HH.ClassName if cond then x else y
       CN x -> HH.ClassName x
   )
+
+maybeEl :: ∀ w i a. Maybe a -> (a -> HH.HTML w i) -> HH.HTML w i
+maybeEl (Just x) f = f x
+maybeEl Nothing _ = HH.text ""
+
+condEl :: ∀ w i. Boolean -> (Unit -> HH.HTML w i) -> HH.HTML w i
+condEl cond f = if cond then f unit else HH.text ""
