@@ -1,0 +1,53 @@
+@import "~assets/styles/global.scss";
+
+.field {
+  --row-gap: 10px;
+
+  position: relative;
+
+  display: grid;
+  row-gap: var(--row-gap);
+
+  width: 100%;
+  max-width: 320px;
+  height: max-content;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.input {
+  @include focus-outline;
+
+  height: 52px;
+  padding: 0 15px;
+
+  border: 1.5px solid rgba(black, .4);
+  background-color: white;
+  color: black;
+
+  &::placeholder {
+    color: rgba(black, .4);
+  }
+
+  &:hover, &:focus {
+    border-color: black;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+} 
+
+.error {
+  position: absolute;
+  top: calc(100% + var(--row-gap));
+
+  color: $error;
+
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
