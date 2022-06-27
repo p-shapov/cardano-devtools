@@ -3,8 +3,10 @@ module Page.UiKit where
 import Prelude
 
 import Component.HTML.Button as Button
+import Component.HTML.Field as Field
 import Component.UiKit.Styles (styles)
 import Component.Utils as U
+import Data.Maybe (Maybe(..))
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -25,9 +27,18 @@ component =
 render :: ∀ st a sl m. st -> H.ComponentHTML a sl m
 render _ = HH.div
   [ U.composeCn [ U.CN styles."ui-kit" ] ]
-  [ HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Buttons" ]
+  [ HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Button" ]
   , HH.div [ U.composeCn [ U.CN styles."plate" ] ]
       [ Button.renderPrimary [ HP.type_ HP.ButtonButton ] [ HH.text "Primary" ]
       , Button.renderSecondary [ HP.type_ HP.ButtonButton ] [ HH.text "Secondary" ]
+      ]
+  , HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Field" ]
+  , HH.div [ U.composeCn [ U.CN styles."plate" ] ]
+      [ Field.render
+          { title: Just "Field", error: Nothing }
+          [ HP.placeholder "Field" ]
+      , Field.render
+          { title: Just "Field", error: Just "Error" }
+          [ HP.placeholder "Field" ]
       ]
   ]
