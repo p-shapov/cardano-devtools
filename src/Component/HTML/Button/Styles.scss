@@ -17,23 +17,25 @@
   line-height: 120%;
   font-weight: 500;
 
+  transition: transform .1s ease-in-out;
+
   &:hover {
     opacity: 0.7;
   }
 
   &:active {
-    opacity: 1;
+    transform: scale(.99);
   }
 
   &--appearance_primary {
     border-color: transparent;
     background-color: $accent;
-    color: $fg-secondary;
+    color: white;
   }
 
   &--appearance_secondary {
     border-color: $accent;
-    background-color: $bg-primary;
+    background-color: white;
     color: $accent;
   }
 }

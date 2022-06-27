@@ -6,7 +6,7 @@ import Component.HTML.Button.Styles (styles)
 import Component.Utils as U
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Web.UIEvent.MouseEvent as ME
+import Web.UIEvent.MouseEvent (MouseEvent)
 
 data Appearance = Primary | Secondary
 
@@ -17,7 +17,7 @@ type Props =
   . Array
       ( HP.IProp
           ( type :: HP.ButtonType
-          , onClick :: ME.MouseEvent
+          , onClick :: MouseEvent
           | r
           )
           i
@@ -28,7 +28,7 @@ render appearance props html =
   HH.button
     ( props <>
         [ U.composeCn
-            [ U.CN styles.button
+            [ U.CN styles."button"
             , U.CondElseCN
                 (appearance == Primary)
                 styles."button--appearance_primary"
@@ -38,8 +38,8 @@ render appearance props html =
     )
     html
 
-renderPrimary :: ∀ i w. Props -> Array (HH.HTML w i) -> HH.HTML w i
+renderPrimary :: ∀ w i. Props -> Array (HH.HTML w i) -> HH.HTML w i
 renderPrimary = render Primary
 
-renderSecondary :: ∀ i w. Props -> Array (HH.HTML w i) -> HH.HTML w i
+renderSecondary :: ∀ w i. Props -> Array (HH.HTML w i) -> HH.HTML w i
 renderSecondary = render Secondary
