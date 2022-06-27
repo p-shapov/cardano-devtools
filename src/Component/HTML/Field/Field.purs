@@ -4,7 +4,7 @@ import Prelude
 
 import Component.HTML.Field.Styles (styles)
 import Component.Utils as U
-import Data.Maybe (Maybe(..), isJust)
+import Data.Maybe (Maybe(..))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Web.Event.Event (Event)
