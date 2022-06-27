@@ -89,7 +89,8 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       'assets': path.resolve(__dirname, './public/assets/'),
-      'Component': path.resolve(__dirname, './src/Component/')
+      'Component': path.resolve(__dirname, './src/Component/'),
+      'Page': path.resolve(__dirname, './src/Page/')
     },
     fallback: {
       fs: false,

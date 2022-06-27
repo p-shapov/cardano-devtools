@@ -11,6 +11,7 @@ import Routing.Duplex.Generic.Syntax ((/))
 data Route
   = Home
   | Wallet
+  | UiKit
   | Contract (Maybe String)
 
 derive instance eqRoute :: Eq Route
@@ -20,12 +21,14 @@ derive instance genericRoute :: Generic Route _
 instance nonStrictEqRoute :: NonStrictEq Route where
   nonStrictEq Home Home = true
   nonStrictEq Wallet Wallet = true
+  nonStrictEq UiKit UiKit = true
   nonStrictEq (Contract _) (Contract _) = true
   nonStrictEq _ _ = false
 
 instance showRoute :: Show Route where
   show Home = "Home"
   show Wallet = "Wallet"
+  show UiKit = "UI Kit"
   show (Contract Nothing) = "Contract"
   show (Contract (Just sid)) = sid
 
@@ -33,5 +36,6 @@ routeCodec :: RD.RouteDuplex' Route
 routeCodec = RD.root $ RG.sum
   { "Home": RG.noArgs
   , "Wallet": "wallet" / RG.noArgs
+  , "UiKit": "ui-kit" / RG.noArgs
   , "Contract": "contract" / RD.optional RD.segment
   }

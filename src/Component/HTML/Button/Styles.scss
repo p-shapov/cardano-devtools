@@ -1,0 +1,39 @@
+@import "~assets/styles/global.scss";
+
+.button {
+  @include focus-outline;
+
+  display: inline-block;
+  padding: 10px 15px;
+
+  width: 100%;
+  max-width: 320px;
+
+  border: 3px solid;
+
+  text-align: center;
+
+  font-size: 22px;
+  line-height: 120%;
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  &--appearance_primary {
+    border-color: transparent;
+    background-color: $accent;
+    color: $fg-secondary;
+  }
+
+  &--appearance_secondary {
+    border-color: $accent;
+    background-color: $bg-primary;
+    color: $accent;
+  }
+}
