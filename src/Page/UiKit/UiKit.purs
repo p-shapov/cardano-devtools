@@ -32,13 +32,31 @@ render _ = HH.div
       [ Button.renderPrimary [ HP.type_ HP.ButtonButton ] [ HH.text "Primary" ]
       , Button.renderSecondary [ HP.type_ HP.ButtonButton ] [ HH.text "Secondary" ]
       ]
-  , HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Field" ]
+  , HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Textfield" ]
   , HH.div [ U.composeCn [ U.CN styles."plate" ] ]
       [ Field.render
           { title: Just "Field", error: Nothing }
           [ HP.placeholder "Field" ]
       , Field.render
-          { title: Just "Field", error: Just "Error" }
+          { title: Just "Field", error: Just "Message" }
           [ HP.placeholder "Field" ]
+      ]
+  , HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Checkbox" ]
+  , HH.div [ U.composeCn [ U.CN styles."plate" ] ]
+      [ Field.render
+          { title: Just "Field", error: Nothing }
+          [ HP.type_ HP.InputCheckbox, HP.placeholder "Field" ]
+      , Field.render
+          { title: Just "Field", error: Just "Message" }
+          [ HP.type_ HP.InputCheckbox, HP.placeholder "Field" ]
+      ]
+  , HH.span [ U.composeCn [ U.CN styles."title" ] ] [ HH.text "Radio" ]
+  , HH.div [ U.composeCn [ U.CN styles."plate" ] ]
+      [ Field.render
+          { title: Just "Field", error: Nothing }
+          [ HP.type_ HP.InputRadio, HP.name "radio", HP.placeholder "Field" ]
+      , Field.render
+          { title: Just "Field", error: Nothing }
+          [ HP.type_ HP.InputRadio, HP.name "radio", HP.placeholder "Field" ]
       ]
   ]

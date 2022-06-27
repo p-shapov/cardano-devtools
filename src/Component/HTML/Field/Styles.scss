@@ -6,10 +6,10 @@
   position: relative;
 
   display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 10px;
   row-gap: var(--row-gap);
 
-  width: 100%;
-  max-width: 320px;
   height: max-content;
 }
 
@@ -17,27 +17,95 @@
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 0.05em;
+
+  cursor: default;
 }
 
 .input {
   @include focus-outline;
 
-  height: 52px;
-  padding: 0 15px;
+  width: 320px;
 
   border: 1.5px solid rgba(black, .4);
-  background-color: white;
   color: black;
 
   &::placeholder {
     color: rgba(black, .4);
   }
 
-  &:hover, &:focus {
+  &:hover, &:focus-visible {
     border-color: black;
 
     &::placeholder {
       color: black;
+    }
+  }
+
+  &:not([type]),
+  &[type="text"],
+  &[type="email"],
+  &[type="tel"],
+  &[type="password"] {
+    grid-column: 1/-1;
+
+    height: 52px;
+    padding: 0 15px;
+
+    & ~ .title {
+      grid-column: 1/-1;
+      grid-row: 1;
+    }
+
+    & ~ .error {
+      grid-column: 1/-1;
+      grid-row: 3;
+    }
+  }
+
+  &[type="checkbox"],
+  &[type="radio"] {
+    position: relative;
+
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+
+    & ~ .title {
+      grid-column: 2;
+      align-self: center;
+    }
+
+    & ~ .error {
+      grid-column: 1/-1;
+    }
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+
+      background-color: white;
+    }
+
+    &:checked {
+      border-color: $accent;
+
+      &::after {
+        background-color: $accent;
+      }
+    }
+  }
+
+  &[type="radio"] {
+    border-radius: 100%;
+
+    &::after {
+      border-radius: 100%;
     }
   }
 } 
@@ -50,4 +118,6 @@
 
   font-size: 14px;
   letter-spacing: 0.05em;
+
+  cursor: default;
 }

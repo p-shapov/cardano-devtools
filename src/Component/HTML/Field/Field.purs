@@ -16,6 +16,8 @@ type Props =
           ( type :: HP.InputType
           , name :: String
           , value :: String
+          , checked :: Boolean
+          , disabled :: Boolean
           , placeholder :: String
           , onChange :: Event
           | r
@@ -31,10 +33,10 @@ type Input =
 render :: ∀ w i. Input -> Props -> HH.HTML w i
 render { title, error } props = HH.label
   [ U.composeCn [ U.CN styles."field" ] ]
-  [ U.maybeEl title \text -> HH.span
+  [ HH.input (props <> [ U.composeCn [ U.CN styles."input" ] ])
+  , U.maybeEl title \text -> HH.span
       [ U.composeCn [ U.CN styles."title" ] ]
       [ HH.text text ]
-  , HH.input (props <> [ U.composeCn [ U.CN styles."input" ] ])
   , U.maybeEl error \text -> HH.span
       [ U.composeCn [ U.CN styles."error" ] ]
       [ HH.text text ]
