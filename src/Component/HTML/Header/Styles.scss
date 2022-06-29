@@ -33,17 +33,37 @@
 }
 
 .nav {
-  display: grid;
-  grid-template-columns: repeat(3, max-content);
+  display: flex;
   column-gap: 60px;
 }
 
 .link {
-  @include link;
+  @include focus-outline;
+  @include underline;
+
+  position: relative;
+  z-index: 0;
+
+  color: black;
 
   text-transform: uppercase;
 
   font-size: 17px;
   font-weight: 500;
   line-height: 120%;
+
+  &--active,
+  &:hover {
+    color: $accent;
+  }
+
+  &::after {
+    max-width: 0;
+
+    transition: max-width 0.3s ease-in-out;
+  }
+
+  &--active::after {
+    max-width: 100%;
+  }
 } 

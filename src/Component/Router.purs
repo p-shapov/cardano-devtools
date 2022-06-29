@@ -2,14 +2,15 @@ module Component.Router where
 
 import Prelude
 
+import Component.HTML.Header as Header
 import Data.Either (hush)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Effect.Class (class MonadEffect)
-import Component.HTML.Header as Header
 import Halogen as H
 import Halogen.HTML as HH
 import Page.Contract as Contract
 import Page.Home as Home
+import Page.UiKit as UiKit
 import Page.Wallet as Wallet
 import Routing.Duplex as RD
 import Routing.Hash as RH
@@ -27,6 +28,7 @@ data Action = Initialize
 type ChildSlots =
   ( home :: Home.Slot Unit
   , wallet :: Wallet.Slot Unit
+  , uiKit :: UiKit.Slot Unit
   , contract :: Contract.Slot Unit
   )
 
@@ -35,6 +37,7 @@ headerNav =
   [ Home
   , Wallet
   , Contract Nothing
+  , UiKit
   ]
 
 component :: ∀ i o m. MonadEffect m => Navigate m => H.Component Query i o m
@@ -57,6 +60,7 @@ component = H.mkComponent
         Just route -> case route of
           Home -> HH.slot_ Home._home unit Home.component unit
           Wallet -> HH.slot_ Wallet._wallet unit Wallet.component unit
+          UiKit -> HH.slot_ UiKit._uiKit unit UiKit.component unit
           Contract msid -> case msid of
             Nothing -> HH.slot_ Contract._contract unit Contract.component unit
             Just sid -> HH.h1_ [ HH.text sid ]

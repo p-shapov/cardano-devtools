@@ -17,15 +17,15 @@ type Input =
 
 render :: ∀ w i. Input -> HH.HTML w i
 render { active, nav } = HH.header
-  [ U.composeCn [ U.CN styles.header ] ]
+  [ U.composeCn [ U.CN styles."header" ] ]
   [ renderLogo
-  , HH.nav [ U.composeCn [ U.CN styles.nav ] ] (renderLink <$> nav)
+  , HH.nav [ U.composeCn [ U.CN styles."nav" ] ] (renderLink <$> nav)
   ]
   where
 
   renderLogo :: HH.HTML w i
   renderLogo = HH.div
-    [ U.composeCn [ U.CN styles.logo ] ]
+    [ U.composeCn [ U.CN styles."logo" ] ]
     [ iconCardano []
     , HH.text "Cardano devtools"
     ]
@@ -33,7 +33,7 @@ render { active, nav } = HH.header
   renderLink :: Route -> HH.HTML w i
   renderLink route = HH.a
     [ U.composeCn
-        [ U.CN styles.link
+        [ U.CN styles."link"
         , U.CondCN isActive styles."link--active"
         ]
     , U.safeHref route

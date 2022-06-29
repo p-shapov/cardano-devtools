@@ -7,34 +7,34 @@
   margin: 0 auto;
 }
 
-@mixin link($underline: true) {
+@mixin focus-outline {
+  outline: transparent dashed 1px;
+  outline-offset: -1px;
+
+  transition: outline-offset .1s ease-in-out, outline-color .1s ease-in-out;
+
+  &:focus-visible {
+    outline-color: $accent;
+    outline-offset: 4px;
+  }
+}
+
+@mixin underline {
   position: relative;
   z-index: 0;
 
-  &--active,
-  &:hover {
-    color: $accent;
-  }
+  &::after {
+    content: "";
 
-  @if ($underline) {
-    &::after {
-      content: "";
+    position: absolute;
 
-      position: absolute;
+    display: block;
 
-      display: block;
+    width: 100%;
+    height: 2px;
 
-      width: 100%;
-      max-width: 0%;
-      height: 2px;
+    background: currentColor;
 
-      background: currentColor;
-
-      transition: max-width 0.3s ease-in-out;
-    }
-
-    &--active::after {
-      max-width: 100%;
-    }
+    transition: max-width 0.3s ease-in-out;
   }
 }

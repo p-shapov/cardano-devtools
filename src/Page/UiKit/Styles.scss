@@ -1,0 +1,18 @@
+@import "~assets/styles/global.scss";
+
+.ui-kit {
+  @include container;
+
+  display: grid;
+  row-gap: 40px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.plate {
+  display: flex;
+  column-gap: 20px;
+}

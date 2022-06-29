@@ -48,5 +48,5 @@
       }
     }
   ],
-  "eslintIgnore": ["./src/_outdated/**/*"]
+  "eslintIgnore": ["./_outdated/**/*.js"]
 }
