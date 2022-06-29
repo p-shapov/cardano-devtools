@@ -29,10 +29,9 @@ render appearance props html =
     ( props <>
         [ U.composeCn
             [ U.CN styles."button"
-            , U.CondElseCN
-                (appearance == Primary)
-                styles."button--appearance_primary"
-                styles."button--appearance_secondary"
+            , U.CN $ case appearance of
+                Primary -> styles."button--appearance_primary"
+                Secondary -> styles."button--appearance_secondary"
             ]
         ]
     )
