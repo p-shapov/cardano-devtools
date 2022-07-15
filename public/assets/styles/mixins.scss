@@ -8,18 +8,20 @@
 }
 
 @mixin focus-outline {
-  outline: transparent dashed 1px;
+  outline: transparent dotted 1.5px;
   outline-offset: -1px;
-
-  transition: outline-offset .1s ease-in-out, outline-color .1s ease-in-out;
 
   &:focus-visible {
     outline-color: $accent;
     outline-offset: 4px;
   }
+
+  &:active { 
+    outline-offset: 0px;
+  }
 }
 
-@mixin underline {
+@mixin underline($height: 1px, $width: 100%) {
   position: relative;
   z-index: 0;
 
@@ -30,11 +32,24 @@
 
     display: block;
 
-    width: 100%;
-    height: 2px;
+    width: $width;
+    height: $height;
 
     background: currentColor;
 
-    transition: max-width 0.3s ease-in-out;
+    transition: max-width 0.3s ease;
   }
+}
+
+@mixin transitions($properties: all, $duration: 100ms, $method: ease, $delay: 0ms) {
+  $value: ();
+  @each $property in $properties {
+      @if length($value) > 0 {
+          $value: append($value, unquote(",") #{$property} $duration $method $delay);
+      }
+      @else {
+          $value: append($value, #{$property} $duration $method $delay);
+      }
+  }
+  transition: $value;
 }

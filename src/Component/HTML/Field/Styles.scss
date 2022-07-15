@@ -23,6 +23,7 @@
 
 .input {
   @include focus-outline;
+  @include transitions(outline-offset border-color color);
 
   width: 320px;
 
